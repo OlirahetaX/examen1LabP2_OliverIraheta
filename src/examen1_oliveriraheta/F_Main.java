@@ -61,6 +61,8 @@ public class F_Main extends javax.swing.JFrame {
         cb_rgb = new javax.swing.JCheckBox();
         L_IP7 = new javax.swing.JLabel();
         p_listar = new javax.swing.JPanel();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        ta_listar = new javax.swing.JTextArea();
         p_eliminar = new javax.swing.JPanel();
         jPanel2 = new javax.swing.JPanel();
         bg_tipoAlma = new javax.swing.ButtonGroup();
@@ -376,15 +378,25 @@ public class F_Main extends javax.swing.JFrame {
 
         tp_crud.addTab("AGREGAR", p_agregar);
 
+        ta_listar.setColumns(20);
+        ta_listar.setRows(5);
+        jScrollPane1.setViewportView(ta_listar);
+
         javax.swing.GroupLayout p_listarLayout = new javax.swing.GroupLayout(p_listar);
         p_listar.setLayout(p_listarLayout);
         p_listarLayout.setHorizontalGroup(
             p_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
+            .addGroup(p_listarLayout.createSequentialGroup()
+                .addGap(93, 93, 93)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(122, Short.MAX_VALUE))
         );
         p_listarLayout.setVerticalGroup(
             p_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
+            .addGroup(p_listarLayout.createSequentialGroup()
+                .addGap(45, 45, 45)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(112, Short.MAX_VALUE))
         );
 
         tp_crud.addTab("LISTAR", p_listar);
@@ -507,6 +519,14 @@ public class F_Main extends javax.swing.JFrame {
             tf_marca.setText(" Ej: HP");
             tf_marca.setForeground(Color.gray);
         }
+        if (tp_crud.getSelectedIndex()==1) {
+            String listar = "";
+            for (PC pc : pcs) {
+                
+                listar+= pcs.indexOf(pc)+")\n"+pc+"\n";
+            }
+            ta_listar.setText(listar);
+        }
         if (tp_crud.getSelectedIndex() == 3) {
             F_crud.setVisible(false);
             this.setVisible(true);
@@ -588,7 +608,14 @@ public class F_Main extends javax.swing.JFrame {
             pcs.add(new Escritorio(Integer.parseInt(tf_ram.getText()),
                     Integer.parseInt(tf_almacenamiento.getText()),
                     tipo, x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
+        }else{
+            boolean x = false;
+            if (cb_rgb.isSelected()) {
+                x =true;
+            }
+            pcs.add(new Laptop(tf_marca.getText(), tf_pantalla.getText(), x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
         }
+       
     }//GEN-LAST:event_b_agregarMouseClicked
 
     /**
@@ -651,9 +678,11 @@ public class F_Main extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
+    private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JPanel p_agregar;
     private javax.swing.JPanel p_eliminar;
     private javax.swing.JPanel p_listar;
+    private javax.swing.JTextArea ta_listar;
     private javax.swing.JTextField tf_almacenamiento;
     private javax.swing.JTextField tf_hostname;
     private javax.swing.JTextField tf_ip;

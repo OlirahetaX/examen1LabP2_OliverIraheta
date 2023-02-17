@@ -3,14 +3,15 @@ package examen1_oliveriraheta;
 
 
 public class Escritorio extends PC{
-    private int ram,storage,tipoStorage;
+    private int ram,storage;
+    private String tipoStorage;
     private boolean grafica;
 
     public Escritorio() {
         super();
     }
 
-    public Escritorio(int ram, int storage, int tipoStorage, boolean grafica, String ip, String mask, String hostname) {
+    public Escritorio(int ram, int storage, String tipoStorage, boolean grafica, String ip, String mask, String hostname) {
         super(ip, mask, hostname);
         this.ram = ram;
         this.storage = storage;
@@ -34,11 +35,11 @@ public class Escritorio extends PC{
         this.storage = storage;
     }
 
-    public int getTipoStorage() {
+    public String getTipoStorage() {
         return tipoStorage;
     }
 
-    public void setTipoStorage(int tipoStorage) {
+    public void setTipoStorage(String tipoStorage) {
         this.tipoStorage = tipoStorage;
     }
 
