@@ -8,7 +8,9 @@ import java.awt.Color;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Scanner;
+import javax.swing.DefaultComboBoxModel;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -70,6 +72,7 @@ public class F_Main extends javax.swing.JFrame {
         ta_listar = new javax.swing.JTextArea();
         p_eliminar = new javax.swing.JPanel();
         cb_eliminar = new javax.swing.JComboBox<>();
+        b_eliminar = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
         bg_tipoAlma = new javax.swing.ButtonGroup();
         P_main = new javax.swing.JPanel();
@@ -344,14 +347,14 @@ public class F_Main extends javax.swing.JFrame {
                     .addComponent(tf_ip, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_hostname, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(tf_mask, javax.swing.GroupLayout.PREFERRED_SIZE, 243, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 54, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 58, Short.MAX_VALUE)
                 .addComponent(b_agregar, javax.swing.GroupLayout.PREFERRED_SIZE, 130, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(38, 38, 38))
             .addGroup(p_agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                 .addGroup(p_agregarLayout.createSequentialGroup()
                     .addGap(65, 65, 65)
                     .addComponent(L_IP7, javax.swing.GroupLayout.PREFERRED_SIZE, 161, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addContainerGap(529, Short.MAX_VALUE)))
+                    .addContainerGap(533, Short.MAX_VALUE)))
         );
         p_agregarLayout.setVerticalGroup(
             p_agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -362,7 +365,7 @@ public class F_Main extends javax.swing.JFrame {
                         .addGroup(p_agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                             .addComponent(L_IP)
                             .addComponent(tf_ip, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 14, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 12, Short.MAX_VALUE)
                         .addGroup(p_agregarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(L_IP2, javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(tf_mask, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -379,7 +382,7 @@ public class F_Main extends javax.swing.JFrame {
                 .addGroup(p_agregarLayout.createSequentialGroup()
                     .addGap(141, 141, 141)
                     .addComponent(L_IP7)
-                    .addContainerGap(351, Short.MAX_VALUE)))
+                    .addContainerGap(349, Short.MAX_VALUE)))
         );
 
         tp_crud.addTab("AGREGAR", p_agregar);
@@ -395,17 +398,31 @@ public class F_Main extends javax.swing.JFrame {
             .addGroup(p_listarLayout.createSequentialGroup()
                 .addGap(93, 93, 93)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 540, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(122, Short.MAX_VALUE))
+                .addContainerGap(126, Short.MAX_VALUE))
         );
         p_listarLayout.setVerticalGroup(
             p_listarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_listarLayout.createSequentialGroup()
                 .addGap(45, 45, 45)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 368, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(112, Short.MAX_VALUE))
+                .addContainerGap(110, Short.MAX_VALUE))
         );
 
         tp_crud.addTab("LISTAR", p_listar);
+
+        b_eliminar.setBackground(new java.awt.Color(255, 0, 0));
+        b_eliminar.setText("eliminar");
+        b_eliminar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_eliminarMouseClicked(evt);
+            }
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                b_eliminarMouseEntered(evt);
+            }
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                b_eliminarMouseExited(evt);
+            }
+        });
 
         javax.swing.GroupLayout p_eliminarLayout = new javax.swing.GroupLayout(p_eliminar);
         p_eliminar.setLayout(p_eliminarLayout);
@@ -414,14 +431,20 @@ public class F_Main extends javax.swing.JFrame {
             .addGroup(p_eliminarLayout.createSequentialGroup()
                 .addGap(115, 115, 115)
                 .addComponent(cb_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(118, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, p_eliminarLayout.createSequentialGroup()
+                .addContainerGap(15, Short.MAX_VALUE)
+                .addComponent(b_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 738, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         p_eliminarLayout.setVerticalGroup(
             p_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(p_eliminarLayout.createSequentialGroup()
                 .addGap(89, 89, 89)
                 .addComponent(cb_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(414, Short.MAX_VALUE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 217, Short.MAX_VALUE)
+                .addComponent(b_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 169, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(26, 26, 26))
         );
 
         tp_crud.addTab("ELIMINAR", p_eliminar);
@@ -430,11 +453,11 @@ public class F_Main extends javax.swing.JFrame {
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
+            .addGap(0, 759, Short.MAX_VALUE)
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
+            .addGap(0, 523, Short.MAX_VALUE)
         );
 
         tp_crud.addTab("<", jPanel2);
@@ -443,11 +466,11 @@ public class F_Main extends javax.swing.JFrame {
         F_crud.getContentPane().setLayout(F_crudLayout);
         F_crudLayout.setHorizontalGroup(
             F_crudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tp_crud, javax.swing.GroupLayout.DEFAULT_SIZE, 759, Short.MAX_VALUE)
+            .addComponent(tp_crud)
         );
         F_crudLayout.setVerticalGroup(
             F_crudLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(tp_crud, javax.swing.GroupLayout.DEFAULT_SIZE, 554, Short.MAX_VALUE)
+            .addComponent(tp_crud)
         );
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
@@ -615,6 +638,8 @@ public class F_Main extends javax.swing.JFrame {
 
     private void b_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_agregarMouseClicked
         int y = 0;
+        DefaultComboBoxModel dc
+                = (DefaultComboBoxModel) cb_eliminar.getModel();
         for (PC pc : pcs) {
             if (pc.getIp().equals(tf_ip.getText())) {
                 y++;
@@ -623,29 +648,38 @@ public class F_Main extends javax.swing.JFrame {
         if (y > 0) {
             JOptionPane.showMessageDialog(null, "IP YA ESTA EN USO");
         } else {
-            if (tp_tipoPc.getSelectedIndex() == 0) {
-                String tipo = "SDD";
-                if (B_HDD.isSelected()) {
-                    tipo = "HDD";
+            String mask = tf_mask.getText().split("\\.")[3];
+            if (mask.equals("192") || mask.equals("224") || mask.equals("240") || mask.equals("248") || mask.equals("252") || mask.equals("254") || mask.equals("255")) {
+                if (tp_tipoPc.getSelectedIndex() == 0) {
+                    String tipo = "SDD";
+                    if (B_HDD.isSelected()) {
+                        tipo = "HDD";
+                    }
+                    boolean x = false;
+                    if (cb_grafica.isSelected()) {
+                        x = true;
+                    }
+                    Escritorio pc = new Escritorio(Integer.parseInt(tf_ram.getText()), Integer.parseInt(tf_almacenamiento.getText()), tipo, x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText());
+                    pcs.add(pc);
+                    dc.addElement(pc);
+                } else {
+                    boolean x = false;
+                    if (cb_rgb.isSelected()) {
+                        x = true;
+                    }
+                    Laptop pc = new Laptop(tf_marca.getText(), tf_pantalla.getText(), x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText());
+                    pcs.add(pc);
+                    dc.addElement(pc);
                 }
-                boolean x = false;
-                if (cb_grafica.isSelected()) {
-                    x = true;
-                }
-                pcs.add(new Escritorio(Integer.parseInt(tf_ram.getText()),
-                        Integer.parseInt(tf_almacenamiento.getText()),
-                        tipo, x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
-            } else {
-                boolean x = false;
-                if (cb_rgb.isSelected()) {
-                    x = true;
-                }
-                pcs.add(new Laptop(tf_marca.getText(), tf_pantalla.getText(), x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
-            }
-            JOptionPane.showMessageDialog(null, "Pc agregada exitosamente");
-            tp_crud.setSelectedIndex(1);
-            tp_crud.setSelectedIndex(0);
+                JOptionPane.showMessageDialog(null, "Pc agregada exitosamente");
+                tp_crud.setSelectedIndex(1);
+                tp_crud.setSelectedIndex(0);
 
+            } else {
+                JOptionPane.showMessageDialog(null, "ULTIMOS DIGITOS DE LA MASCARAS INCORRECTOS");
+            }
+
+            cb_eliminar.setModel(dc);
         }
     }//GEN-LAST:event_b_agregarMouseClicked
 
@@ -687,6 +721,27 @@ public class F_Main extends javax.swing.JFrame {
             }
         }
     }//GEN-LAST:event_b_ingresarMouseClicked
+
+    private void b_eliminarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_eliminarMouseClicked
+
+        DefaultComboBoxModel modelo = (DefaultComboBoxModel) cb_eliminar.getModel();
+        int x = cb_eliminar.getSelectedIndex();
+        modelo.removeElement(x);
+        cb_eliminar.setModel(modelo);
+        pcs.remove(x);
+        JOptionPane.showMessageDialog(null,"PC ELIMINADA");
+    }//GEN-LAST:event_b_eliminarMouseClicked
+
+    private void b_eliminarMouseEntered(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_eliminarMouseEntered
+        b_eliminar.setBackground(Color.BLACK);
+        b_eliminar.setForeground(Color.yellow);
+    }//GEN-LAST:event_b_eliminarMouseEntered
+
+    private void b_eliminarMouseExited(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_eliminarMouseExited
+        // TODO add your handling code here:
+         b_eliminar.setBackground(Color.red);
+        b_eliminar.setForeground(Color.black);
+    }//GEN-LAST:event_b_eliminarMouseExited
 
     /**
      * @param args the command line arguments
@@ -741,6 +796,7 @@ public class F_Main extends javax.swing.JFrame {
     private javax.swing.JPanel P_main;
     private javax.swing.JButton b_agregar;
     private javax.swing.JButton b_crud;
+    private javax.swing.JButton b_eliminar;
     private javax.swing.JButton b_ingresar;
     private javax.swing.ButtonGroup bg_tipoAlma;
     private javax.swing.JComboBox<String> cb_eliminar;
@@ -765,31 +821,31 @@ public class F_Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tp_tipoPc;
     // End of variables declaration//GEN-END:variables
     public static String decimalToBinary(int decimal) {
-    if (decimal == 0) {
-        return "0";
+        if (decimal == 0) {
+            return "0";
+        }
+        StringBuilder binary = new StringBuilder();
+        while (decimal > 0) {
+            int rem = decimal % 2;
+            binary.append(rem);
+            decimal = decimal / 2;
+        }
+        return binary.reverse().toString();
     }
-    StringBuilder binary = new StringBuilder();
-    while (decimal > 0) {
-        int rem = decimal % 2;
-        binary.append(rem);
-        decimal = decimal / 2;
-    }
-    return binary.reverse().toString();
-}
 
     private void ping(int pcIndex, String ip) {
         int y = 0;
         //ip , IpIndex  , Ipmask  son de la pc al que quieren comparar
-        int IpIndex=0;
+        int IpIndex = 0;
         for (PC pc : pcs) {
             if (pc.getIp().equals(ip)) {
                 y++;
                 IpIndex = pcs.indexOf(pc);
             }
-            
+
         }
         //valido que exista el ip que ingreso el usuario
-        
+
         if (y == 0) {
             System.out.println("Pinging to " + ip + " with 32 bits of data"
                     + "\nRequest timed out"
@@ -803,31 +859,41 @@ public class F_Main extends javax.swing.JFrame {
             String[] ip2 = ip.split("\\.");
 //            System.out.println(Arrays.toString(ip1)+"  ll");
 //            System.out.println(Arrays.toString(ip2)+" 22");
-            if (ip1[0].equals(ip2[0]) && ip1[1].equals(ip2[1]) && ip1[2].equals(ip2[2] )) {
+            if (ip1[0].equals(ip2[0]) && ip1[1].equals(ip2[1]) && ip1[2].equals(ip2[2])) {
                 String IpMask = pcs.get(IpIndex).getMask();
                 String newIpMask = decimalToBinary(Integer.parseInt(IpMask.split("\\.")[3]));
-                
+
                 String IP1Bin = decimalToBinary(Integer.parseInt(ip1[3]));
                 String IP2Bin = decimalToBinary(Integer.parseInt(ip2[3]));
+//                System.out.println(IP1Bin);
+//                System.out.println(IP2Bin);
+////                for (int i = 0; i < (11-IP1Bin.length()); i++) {
+////                     IP1Bin="0"+IP1Bin;
+////                }
+////                for (int i = 0; i < (11-IP2Bin.length()); i++) {
+////                     IP2Bin="0"+IP2Bin;
+////                }
+//                System.out.println(IP1Bin);
+//                System.out.println(IP2Bin);
                 int unos = 0;
                 for (int i = 0; i < IpMask.length(); i++) {
                     if (IpMask.charAt(i) == '1') {
                         unos++;
                     }
                 }
-                if (IP1Bin.substring(0, unos).equals(IP2Bin.substring(0,unos))) {
+                if (IP1Bin.substring(0, unos).equals(IP2Bin.substring(0, unos))) {
                     System.out.println("Pinging to " + ip + " with 32 bits of data"
-                    + "\nReply from "+ip+": bytes=32 time=37ms TTL=46"
-                    + "\nReply from "+ip+": bytes=32 time=37ms TTL=46"
-                    + "\nReply from "+ip+": bytes=32 time=37ms TTL=46"
-                    + "\nReply from "+ip+": bytes=32 time=37ms TTL=46"
-                    + "\n\nPing statistics for " + ip + ":"
-                    + "\n     Packects: Sent = 4, Received = 4, Lost = 0 (0% loss) ");
-                }else{
+                            + "\nReply from " + ip + ": bytes=32 time=37ms TTL=46"
+                            + "\nReply from " + ip + ": bytes=32 time=37ms TTL=46"
+                            + "\nReply from " + ip + ": bytes=32 time=37ms TTL=46"
+                            + "\nReply from " + ip + ": bytes=32 time=37ms TTL=46"
+                            + "\n\nPing statistics for " + ip + ":"
+                            + "\n     Packects: Sent = 4, Received = 4, Lost = 0 (0% loss) ");
+                } else {
                     existeDiferenteSystema(ip);
                 }
-                
-            }else{
+
+            } else {
                 existeDiferenteSystema(ip);
             }
         }
@@ -836,11 +902,11 @@ public class F_Main extends javax.swing.JFrame {
 
     private void existeDiferenteSystema(String ip) {
         System.out.println("Pinging to " + ip + " with 32 bits of data"
-                    + "\nReply from "+ip+" Destination host unreachable"
-                    + "\nReply from "+ip+" Destination host unreachable"
-                    + "\nReply from "+ip+" Destination host unreachable"
-                    + "\nReply from "+ip+" Destination host unreachable"
-                    + "\n\nPing statistics for " + ip + ":"
-                    + "\n     Packects: Sent = 4, Received = 0, Lost = 4 (100% loss) ");
+                + "\nReply from " + ip + " Destination host unreachable"
+                + "\nReply from " + ip + " Destination host unreachable"
+                + "\nReply from " + ip + " Destination host unreachable"
+                + "\nReply from " + ip + " Destination host unreachable"
+                + "\n\nPing statistics for " + ip + ":"
+                + "\n     Packects: Sent = 4, Received = 0, Lost = 4 (100% loss) ");
     }
 }
