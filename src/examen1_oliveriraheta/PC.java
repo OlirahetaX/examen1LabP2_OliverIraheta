@@ -44,5 +44,8 @@ public class PC {
                 + "\nIP : " + ip 
                 + "\n Mask : " + mask  ;
     }
+    public String toString2(){
+        return "Hostname : "+ hostname;
+    }
     
 }

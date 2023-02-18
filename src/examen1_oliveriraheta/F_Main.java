@@ -6,6 +6,7 @@ package examen1_oliveriraheta;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -64,6 +65,7 @@ public class F_Main extends javax.swing.JFrame {
         jScrollPane1 = new javax.swing.JScrollPane();
         ta_listar = new javax.swing.JTextArea();
         p_eliminar = new javax.swing.JPanel();
+        cb_eliminar = new javax.swing.JComboBox<>();
         jPanel2 = new javax.swing.JPanel();
         bg_tipoAlma = new javax.swing.ButtonGroup();
         P_main = new javax.swing.JPanel();
@@ -405,11 +407,17 @@ public class F_Main extends javax.swing.JFrame {
         p_eliminar.setLayout(p_eliminarLayout);
         p_eliminarLayout.setHorizontalGroup(
             p_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 755, Short.MAX_VALUE)
+            .addGroup(p_eliminarLayout.createSequentialGroup()
+                .addGap(115, 115, 115)
+                .addComponent(cb_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 522, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(118, Short.MAX_VALUE))
         );
         p_eliminarLayout.setVerticalGroup(
             p_eliminarLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 525, Short.MAX_VALUE)
+            .addGroup(p_eliminarLayout.createSequentialGroup()
+                .addGap(89, 89, 89)
+                .addComponent(cb_eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(414, Short.MAX_VALUE))
         );
 
         tp_crud.addTab("ELIMINAR", p_eliminar);
@@ -615,7 +623,10 @@ public class F_Main extends javax.swing.JFrame {
             }
             pcs.add(new Laptop(tf_marca.getText(), tf_pantalla.getText(), x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
         }
-       
+        JOptionPane.showMessageDialog(this,"Pc agregada exitosamente");
+        tp_crud.setSelectedIndex(1);
+         tp_crud.setSelectedIndex(0);
+        
     }//GEN-LAST:event_b_agregarMouseClicked
 
     /**
@@ -673,6 +684,7 @@ public class F_Main extends javax.swing.JFrame {
     private javax.swing.JButton b_crud;
     private javax.swing.JButton b_ingresar;
     private javax.swing.ButtonGroup bg_tipoAlma;
+    private javax.swing.JComboBox<String> cb_eliminar;
     private javax.swing.JCheckBox cb_grafica;
     private javax.swing.JCheckBox cb_rgb;
     private javax.swing.JPanel jPanel1;
