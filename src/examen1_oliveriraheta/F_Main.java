@@ -806,25 +806,41 @@ public class F_Main extends javax.swing.JFrame {
             if (ip1[0].equals(ip2[0]) && ip1[1].equals(ip2[1]) && ip1[2].equals(ip2[2] )) {
                 String IpMask = pcs.get(IpIndex).getMask();
                 String newIpMask = decimalToBinary(Integer.parseInt(IpMask.split("\\.")[3]));
-
-                for (int i = 0; i < IpMask.length(); i++) {
-                    if (IpMask.charAt(i) == '1') {
-                        
-                    }
-                }
+                
                 String IP1Bin = decimalToBinary(Integer.parseInt(ip1[3]));
                 String IP2Bin = decimalToBinary(Integer.parseInt(ip2[3]));
+                int unos = 0;
+                for (int i = 0; i < IpMask.length(); i++) {
+                    if (IpMask.charAt(i) == '1') {
+                        unos++;
+                    }
+                }
+                if (IP1Bin.substring(0, unos).equals(IP2Bin.substring(0,unos))) {
+                    System.out.println("Pinging to " + ip + " with 32 bits of data"
+                    + "\nReply from "+ip+": bytes=32 time=37ms TTL=46"
+                    + "\nReply from "+ip+": bytes=32 time=37ms TTL=46"
+                    + "\nReply from "+ip+": bytes=32 time=37ms TTL=46"
+                    + "\nReply from "+ip+": bytes=32 time=37ms TTL=46"
+                    + "\n\nPing statistics for " + ip + ":"
+                    + "\n     Packects: Sent = 4, Received = 4, Lost = 0 (0% loss) ");
+                }else{
+                    existeDiferenteSystema(ip);
+                }
                 
             }else{
-                System.out.println("Pinging to " + ip + " with 32 bits of data"
+                existeDiferenteSystema(ip);
+            }
+        }
+
+    }
+
+    private void existeDiferenteSystema(String ip) {
+        System.out.println("Pinging to " + ip + " with 32 bits of data"
                     + "\nReply from "+ip+" Destination host unreachable"
                     + "\nReply from "+ip+" Destination host unreachable"
                     + "\nReply from "+ip+" Destination host unreachable"
                     + "\nReply from "+ip+" Destination host unreachable"
                     + "\n\nPing statistics for " + ip + ":"
                     + "\n     Packects: Sent = 4, Received = 0, Lost = 4 (100% loss) ");
-            }
-        }
-
     }
 }
