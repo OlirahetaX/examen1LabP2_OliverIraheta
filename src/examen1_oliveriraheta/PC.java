@@ -42,7 +42,7 @@ public class PC {
     public String toString() {
         return "Hostname : " + hostname 
                 + "\nIP : " + ip 
-                + "\n Mask : " + mask  ;
+                + "\nMask : " + mask  ;
     }
     public String toString2(){
         return "Hostname : "+ hostname;

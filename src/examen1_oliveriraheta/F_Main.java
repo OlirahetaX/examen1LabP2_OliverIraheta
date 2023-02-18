@@ -6,6 +6,7 @@ package examen1_oliveriraheta;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Scanner;
 import javax.swing.JOptionPane;
 
 /**
@@ -17,6 +18,8 @@ public class F_Main extends javax.swing.JFrame {
     /**
      * Creates new form F_Main
      */
+    public static Scanner rm = new Scanner(System.in);
+
     public F_Main() {
         initComponents();
         this.setLocationRelativeTo(null);
@@ -457,6 +460,11 @@ public class F_Main extends javax.swing.JFrame {
         b_ingresar.setText("INGRESAR PC");
         b_ingresar.setBorder(javax.swing.BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.RAISED));
         b_ingresar.setCursor(new java.awt.Cursor(java.awt.Cursor.HAND_CURSOR));
+        b_ingresar.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                b_ingresarMouseClicked(evt);
+            }
+        });
 
         b_crud.setBackground(new java.awt.Color(102, 102, 102));
         b_crud.setForeground(new java.awt.Color(255, 255, 255));
@@ -527,17 +535,18 @@ public class F_Main extends javax.swing.JFrame {
             tf_marca.setText(" Ej: HP");
             tf_marca.setForeground(Color.gray);
         }
-        if (tp_crud.getSelectedIndex()==1) {
+        if (tp_crud.getSelectedIndex() == 1) {
             String listar = "";
             for (PC pc : pcs) {
-                
-                listar+= pcs.indexOf(pc)+")\n"+pc+"\n";
+
+                listar += pcs.indexOf(pc) + ")\n" + pc + "\n";
             }
             ta_listar.setText(listar);
         }
         if (tp_crud.getSelectedIndex() == 3) {
             F_crud.setVisible(false);
             this.setVisible(true);
+            
         }
     }//GEN-LAST:event_tp_crudStateChanged
 
@@ -610,24 +619,60 @@ public class F_Main extends javax.swing.JFrame {
                 tipo = "HDD";
             }
             boolean x = false;
-            if(cb_grafica.isSelected()){
-                x=true;
+            if (cb_grafica.isSelected()) {
+                x = true;
             }
             pcs.add(new Escritorio(Integer.parseInt(tf_ram.getText()),
                     Integer.parseInt(tf_almacenamiento.getText()),
                     tipo, x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
-        }else{
+        } else {
             boolean x = false;
             if (cb_rgb.isSelected()) {
-                x =true;
+                x = true;
             }
             pcs.add(new Laptop(tf_marca.getText(), tf_pantalla.getText(), x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
         }
-        JOptionPane.showMessageDialog(this,"Pc agregada exitosamente");
+        JOptionPane.showMessageDialog(this, "Pc agregada exitosamente");
         tp_crud.setSelectedIndex(1);
-         tp_crud.setSelectedIndex(0);
+        tp_crud.setSelectedIndex(0);
         
+
     }//GEN-LAST:event_b_agregarMouseClicked
+
+    private void b_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_ingresarMouseClicked
+        boolean y = true;
+            String ipIngresar = JOptionPane.showInputDialog("Ingrese IP");
+            boolean x = false;
+         
+            int pcIndex = 0;
+            for (PC pc : pcs) {
+                if (pc.getIp().equals(ipIngresar)) {
+                    x = true;
+                    pcIndex = pcs.indexOf(pc);
+                }
+            }
+            if (!x) {
+                JOptionPane.showMessageDialog(this, "IP NO ENCONTRADO");
+            }else{
+                while (y) {
+                System.out.print("\n"+pcs.get(pcIndex).getHostname()+"# ");
+                rm = new Scanner(System.in);
+                String opc = rm.nextLine().toLowerCase();
+                switch(opc){
+                    case "ping"->{
+                        
+                    }
+                    case "show"->{
+                        System.out.println(pcs.get(pcIndex));
+                    }
+                    case "exit"->{
+                        y = false;
+                    }
+                    default -> JOptionPane.showMessageDialog(this,"OPCION NO VALIDA");
+                }
+            }
+        }
+    }//GEN-LAST:event_b_ingresarMouseClicked
 
     /**
      * @param args the command line arguments
