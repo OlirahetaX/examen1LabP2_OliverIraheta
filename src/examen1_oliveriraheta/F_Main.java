@@ -6,6 +6,7 @@ package examen1_oliveriraheta;
 
 import java.awt.Color;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Scanner;
 import javax.swing.JOptionPane;
 
@@ -546,7 +547,7 @@ public class F_Main extends javax.swing.JFrame {
         if (tp_crud.getSelectedIndex() == 3) {
             F_crud.setVisible(false);
             this.setVisible(true);
-            
+
         }
     }//GEN-LAST:event_tp_crudStateChanged
 
@@ -613,62 +614,75 @@ public class F_Main extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_rgbActionPerformed
 
     private void b_agregarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_agregarMouseClicked
-        if (tp_tipoPc.getSelectedIndex() == 0) {
-            String tipo = "SDD";
-            if (B_HDD.isSelected()) {
-                tipo = "HDD";
+        int y = 0;
+        for (PC pc : pcs) {
+            if (pc.getIp().equals(tf_ip.getText())) {
+                y++;
             }
-            boolean x = false;
-            if (cb_grafica.isSelected()) {
-                x = true;
-            }
-            pcs.add(new Escritorio(Integer.parseInt(tf_ram.getText()),
-                    Integer.parseInt(tf_almacenamiento.getText()),
-                    tipo, x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
-        } else {
-            boolean x = false;
-            if (cb_rgb.isSelected()) {
-                x = true;
-            }
-            pcs.add(new Laptop(tf_marca.getText(), tf_pantalla.getText(), x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
         }
-        JOptionPane.showMessageDialog(this, "Pc agregada exitosamente");
-        tp_crud.setSelectedIndex(1);
-        tp_crud.setSelectedIndex(0);
-        
+        if (y > 0) {
+            JOptionPane.showMessageDialog(null, "IP YA ESTA EN USO");
+        } else {
+            if (tp_tipoPc.getSelectedIndex() == 0) {
+                String tipo = "SDD";
+                if (B_HDD.isSelected()) {
+                    tipo = "HDD";
+                }
+                boolean x = false;
+                if (cb_grafica.isSelected()) {
+                    x = true;
+                }
+                pcs.add(new Escritorio(Integer.parseInt(tf_ram.getText()),
+                        Integer.parseInt(tf_almacenamiento.getText()),
+                        tipo, x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
+            } else {
+                boolean x = false;
+                if (cb_rgb.isSelected()) {
+                    x = true;
+                }
+                pcs.add(new Laptop(tf_marca.getText(), tf_pantalla.getText(), x, tf_ip.getText(), tf_mask.getText(), tf_hostname.getText()));
+            }
+            JOptionPane.showMessageDialog(null, "Pc agregada exitosamente");
+            tp_crud.setSelectedIndex(1);
+            tp_crud.setSelectedIndex(0);
 
+        }
     }//GEN-LAST:event_b_agregarMouseClicked
 
     private void b_ingresarMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_b_ingresarMouseClicked
         boolean y = true;
-            String ipIngresar = JOptionPane.showInputDialog("Ingrese IP");
-            boolean x = false;
-         
-            int pcIndex = 0;
-            for (PC pc : pcs) {
-                if (pc.getIp().equals(ipIngresar)) {
-                    x = true;
-                    pcIndex = pcs.indexOf(pc);
-                }
+        String ipIngresar = JOptionPane.showInputDialog("Ingrese IP");
+        boolean x = false;
+
+        int pcIndex = 0;
+        for (PC pc : pcs) {
+            if (pc.getIp().equals(ipIngresar)) {
+                x = true;
+                pcIndex = pcs.indexOf(pc);
             }
-            if (!x) {
-                JOptionPane.showMessageDialog(this, "IP NO ENCONTRADO");
-            }else{
-                while (y) {
-                System.out.print("\n"+pcs.get(pcIndex).getHostname()+"# ");
+        }
+        if (!x) {
+            JOptionPane.showMessageDialog(null, "IP NO ENCONTRADO");
+        } else {
+            this.setVisible(false);
+            while (y) {
+                System.out.print("\n" + pcs.get(pcIndex).getHostname() + "# ");
                 rm = new Scanner(System.in);
                 String opc = rm.nextLine().toLowerCase();
-                switch(opc){
-                    case "ping"->{
-                        
+                String opc2 = opc.substring(0, 4);
+                switch (opc2) {
+                    case "ping" -> {
+                        ping(pcIndex, opc.substring(5));
                     }
-                    case "show"->{
+                    case "show" -> {
                         System.out.println(pcs.get(pcIndex));
                     }
-                    case "exit"->{
+                    case "exit" -> {
                         y = false;
+                        this.setVisible(true);
                     }
-                    default -> JOptionPane.showMessageDialog(this,"OPCION NO VALIDA");
+                    default ->
+                        JOptionPane.showMessageDialog(null, "OPCION NO VALIDA");
                 }
             }
         }
@@ -750,4 +764,67 @@ public class F_Main extends javax.swing.JFrame {
     private javax.swing.JTabbedPane tp_crud;
     private javax.swing.JTabbedPane tp_tipoPc;
     // End of variables declaration//GEN-END:variables
+    public static String decimalToBinary(int decimal) {
+    if (decimal == 0) {
+        return "0";
+    }
+    StringBuilder binary = new StringBuilder();
+    while (decimal > 0) {
+        int rem = decimal % 2;
+        binary.append(rem);
+        decimal = decimal / 2;
+    }
+    return binary.reverse().toString();
+}
+
+    private void ping(int pcIndex, String ip) {
+        int y = 0;
+        //ip , IpIndex  , Ipmask  son de la pc al que quieren comparar
+        int IpIndex=0;
+        for (PC pc : pcs) {
+            if (pc.getIp().equals(ip)) {
+                y++;
+                IpIndex = pcs.indexOf(pc);
+            }
+            
+        }
+        //valido que exista el ip que ingreso el usuario
+        
+        if (y == 0) {
+            System.out.println("Pinging to " + ip + " with 32 bits of data"
+                    + "\nRequest timed out"
+                    + "\nRequest timed out"
+                    + "\nRequest timed out"
+                    + "\nRequest timed out"
+                    + "\n\nPing statistics for " + ip + ":"
+                    + "\n     Packects: Sent = 4, Received = 0, Lost = 4 (100% loss) ");
+        } else {
+            String[] ip1 = pcs.get(pcIndex).getIp().split("\\.");
+            String[] ip2 = ip.split("\\.");
+//            System.out.println(Arrays.toString(ip1)+"  ll");
+//            System.out.println(Arrays.toString(ip2)+" 22");
+            if (ip1[0].equals(ip2[0]) && ip1[1].equals(ip2[1]) && ip1[2].equals(ip2[2] )) {
+                String IpMask = pcs.get(IpIndex).getMask();
+                String newIpMask = decimalToBinary(Integer.parseInt(IpMask.split("\\.")[3]));
+
+                for (int i = 0; i < IpMask.length(); i++) {
+                    if (IpMask.charAt(i) == '1') {
+                        
+                    }
+                }
+                String IP1Bin = decimalToBinary(Integer.parseInt(ip1[3]));
+                String IP2Bin = decimalToBinary(Integer.parseInt(ip2[3]));
+                
+            }else{
+                System.out.println("Pinging to " + ip + " with 32 bits of data"
+                    + "\nReply from "+ip+" Destination host unreachable"
+                    + "\nReply from "+ip+" Destination host unreachable"
+                    + "\nReply from "+ip+" Destination host unreachable"
+                    + "\nReply from "+ip+" Destination host unreachable"
+                    + "\n\nPing statistics for " + ip + ":"
+                    + "\n     Packects: Sent = 4, Received = 0, Lost = 4 (100% loss) ");
+            }
+        }
+
+    }
 }
